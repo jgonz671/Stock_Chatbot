@@ -1,0 +1,74 @@
+# Byte-compiled / compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+stockbot-env/
+.env/
+
+# Environment variables and secrets
+.env
+*.env
+/.streamlit/secrets.toml
+
+# Streamlit cache and logs
+.streamlit/
+*/.streamlit/
+.cache/
+logs/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook checkpoints (if used)
+.ipynb_checkpoints/
+
+# Docker
+*.log
+docker-compose.override.yml
+**/*.tar
+.Dockerfile
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+*.swp
+
+# Coverage reports
+htmlcov/
+*.cover
+.coverage
+.cache
+
+# Test outputs
+.tox/
+.nox/
+*.test
+.pytest_cache/
+__tests__/
+
+# Database files
+*.sqlite3
+*.db
+
+# Node.js (if applicable in frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
