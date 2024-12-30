@@ -1,32 +1,38 @@
 import streamlit as st
-import pandas as pd
-from alpha_vantage.timeseries import TimeSeries
-import matplotlib.pyplot as plt
+from pages.chatbot import chatbot_page
+from pages.dashboard import dashboard_page
 
-# Set up the page
-st.set_page_config(page_title="Stock Analysis Chatbot", layout="wide")
+# Set page configuration to "wide" layout
+st.set_page_config(
+    page_title="Stock Analysis Chatbot",
+    layout="wide",
+    initial_sidebar_state="collapsed",  # Collapsed initially, but will be hidden
+)
 
-# Alpha Vantage API Key
-API_KEY = st.secrets["ALPHA_VANTAGE_API_KEY"]
+# Add custom CSS to hide the sidebar and its toggle control
+st.markdown(
+    """
+    <style>
+        [data-testid="stSidebar"] { 
+            display: none;  /* Hides the entire sidebar */ 
+        }
+        [data-testid="collapsedControl"] { 
+            display: none;  /* Hides the sidebar toggle control */ 
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-# Function to fetch stock data
-def fetch_stock_data(symbol):
-    ts = TimeSeries(key=API_KEY, output_format='pandas')
-    data, meta_data = ts.get_daily(symbol=symbol, outputsize='compact')
-    return data
-
-# Chatbot interface
+# Main page navigation
 st.title("Stock Analysis Chatbot")
+st.markdown("Use the navigation below to switch between the Dashboard and Chatbot.")
 
-symbol = st.text_input("Enter a stock symbol (e.g., TSLA, AAPL):")
+# Navigation bullet points on the main page
+page = st.radio("Go to", ["Dashboard", "Chatbot"], horizontal=True)
 
-if symbol:
-    try:
-        data = fetch_stock_data(symbol)
-        st.write(f"Showing data for {symbol.upper()}:")
-        st.write(data.head())
-
-        # Plot closing prices
-        st.line_chart(data['4. close'])
-    except Exception as e:
-        st.error(f"Error fetching data: {e}")
+# Route to the selected page
+if page == "Dashboard":
+    dashboard_page()
+elif page == "Chatbot":
+    chatbot_page()

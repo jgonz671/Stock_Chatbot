@@ -4,15 +4,15 @@ services:
     ports:
       - "8501:8501"
     environment:
-      # Add any environment variables needed for your stock analysis app
+      # Link the environment variables to the .env file
       - ALPHA_VANTAGE_API_KEY=${ALPHA_VANTAGE_API_KEY}
     volumes:
       - .:/app
+      - ./.env:/app/.env:ro
     networks:
       - chatbot_network
 
 volumes:
-  # Remove unused volumes if they are not relevant
   chatbot_data:
     driver: local
 
